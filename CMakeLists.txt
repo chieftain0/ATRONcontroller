@@ -18,7 +18,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Set the project name
-set(CMAKE_PROJECT_NAME ATRONstm32)
+set(CMAKE_PROJECT_NAME ATRONcontroller)
 
 # Include toolchain file
 include("cmake/gcc-arm-none-eabi.cmake")
