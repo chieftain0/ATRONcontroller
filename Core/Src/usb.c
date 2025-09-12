@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    usb.c
-  * @brief   This file provides code for the configuration
-  *          of the USB instances.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2025 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    usb.c
+ * @brief   This file provides code for the configuration
+ *          of the USB instances.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2025 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "usb.h"
@@ -51,38 +51,37 @@ void MX_USB_PCD_Init(void)
   /* USER CODE BEGIN USB_Init 2 */
 
   /* USER CODE END USB_Init 2 */
-
 }
 
-void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
+void HAL_PCD_MspInit(PCD_HandleTypeDef *pcdHandle)
 {
 
-  if(pcdHandle->Instance==USB)
+  if (pcdHandle->Instance == USB)
   {
-  /* USER CODE BEGIN USB_MspInit 0 */
+    /* USER CODE BEGIN USB_MspInit 0 */
 
-  /* USER CODE END USB_MspInit 0 */
+    /* USER CODE END USB_MspInit 0 */
     /* USB clock enable */
     __HAL_RCC_USB_CLK_ENABLE();
-  /* USER CODE BEGIN USB_MspInit 1 */
+    /* USER CODE BEGIN USB_MspInit 1 */
 
-  /* USER CODE END USB_MspInit 1 */
+    /* USER CODE END USB_MspInit 1 */
   }
 }
 
-void HAL_PCD_MspDeInit(PCD_HandleTypeDef* pcdHandle)
+void HAL_PCD_MspDeInit(PCD_HandleTypeDef *pcdHandle)
 {
 
-  if(pcdHandle->Instance==USB)
+  if (pcdHandle->Instance == USB)
   {
-  /* USER CODE BEGIN USB_MspDeInit 0 */
+    /* USER CODE BEGIN USB_MspDeInit 0 */
 
-  /* USER CODE END USB_MspDeInit 0 */
+    /* USER CODE END USB_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_USB_CLK_DISABLE();
-  /* USER CODE BEGIN USB_MspDeInit 1 */
+    /* USER CODE BEGIN USB_MspDeInit 1 */
 
-  /* USER CODE END USB_MspDeInit 1 */
+    /* USER CODE END USB_MspDeInit 1 */
   }
 }
 

@@ -62,7 +62,7 @@ uint8_t RC_mode = 0;
 // BNO055 Custom Variables
 uint8_t BNO055_address = 0x28;
 uint8_t BNO055_requested = 0;
-uint8_t BNO055_ID = 0;
+uint8_t BNO055_ID = 1;
 uint32_t imu_poll_timer = 0;
 const double imu_poll_period = 1000;
 
@@ -82,14 +82,6 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_PCD_Init();
   MX_TIM1_Init();
-
-  // Enable Clocks
-  __HAL_RCC_TIM1_CLK_ENABLE();
-  __HAL_RCC_TIM2_CLK_ENABLE();
-  __HAL_RCC_TIM3_CLK_ENABLE();
-  __HAL_RCC_TIM4_CLK_ENABLE();
-  __HAL_RCC_AFIO_CLK_ENABLE();
-  __HAL_RCC_I2C1_CLK_ENABLE();
 
   // Initialize ESC PWM channels
   HAL_TIM_PWM_Start(&htim2, ESC_CHANNELS[0]);
@@ -131,15 +123,12 @@ int main(void)
 
   // Enable BNO055
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-  HAL_Delay(500);
+  HAL_Delay(1000);
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-  HAL_Delay(500);
+  HAL_Delay(1000);
 
   while (1)
   {
-    HAL_I2C_Mem_Read(&hi2c1, BNO055_address << 1, 0x00, I2C_MEMADD_SIZE_8BIT, &BNO055_ID, 1, HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart3, &BNO055_ID, 1, 1000);
-    HAL_Delay(1000);
     if (RC_mode) // Write RC channel values if in RC mode
     {
       __HAL_TIM_SET_COMPARE(&htim2, RC_CHANNELS[0], RC_Values[0]);
@@ -188,7 +177,7 @@ int main(void)
 
       char *json_response = cJSON_Print(root);
 
-      HAL_UART_Transmit_IT(&huart3, (uint8_t *)json_response, strlen(json_response));
+      HAL_UART_Transmit(&huart3, (uint8_t *)json_response, strlen(json_response), HAL_MAX_DELAY);
 
       free(json_response);
       cJSON_Delete(root);
